@@ -18,11 +18,11 @@ then
 
 One example use could be in a validator class
 ```ruby
-class RUTValidator < ActiveModel::Validator
+class RunValidator < ActiveModel::Validator
   require 'chilean_rut'
   def validate(record)
     unless RUT::validate(record.rut)
-      record.errors[:rut] << I18n.t(:invalid_rut)
+      record.errors.add(:rut, :invalid_rut, message: I18n.t(:invalid_rut))
     end
   end
 end
@@ -30,7 +30,7 @@ end
 which is then referenced from a model
 ```ruby
 class Person < ActiveRecord::Base
-  validates_with RUTValidator
+  validates_with RunValidator
 end
 ```
 class functions
