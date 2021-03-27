@@ -18,7 +18,7 @@ then
 
 One example use could be in a validator class
 ```ruby
-class RunValidator < ActiveModel::Validator
+class RutValidator < ActiveModel::Validator
   require 'chilean_rut'
   def validate(record)
     unless RUT::validate(record.rut)
@@ -27,12 +27,16 @@ class RunValidator < ActiveModel::Validator
   end
 end
 ```
+add it to the file rut_validator.rb in the path app/validators/rut_validator.rb
+
+
 which is then referenced from a model
 ```ruby
 class Person < ActiveRecord::Base
-  validates_with RunValidator
+  validates_with RutValidator
 end
 ```
+
 class functions
 ```ruby
 require 'chilean_rut'
